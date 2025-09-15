@@ -14,6 +14,7 @@ BiocManager::install("DESeq2")
 library(DESeq2)
 library(tidyverse)
 library(airway)
+library(ggplot2)
 
 # Step 1: preparing count data ----------------
 
@@ -75,7 +76,13 @@ resultsNames(dds)
 
 results(dds, contrast = c("dexamethasone", "treated_4hrs", "untreated"))
 
+# output directory for plots
+out_dir <- "C:/Users/dasan/Downloads/Bioinformatics_Project/Differencial_expression_analysis/Plots/"
+dir.create(out_dir, showWarnings = FALSE)  # create folder if not exists
+
 # MA plot
+png(filename = paste0(out_dir, "MA_plot.png"), width = 2000, height = 1600, res = 300)
 plotMA(res)
+dev.off()
 
 
